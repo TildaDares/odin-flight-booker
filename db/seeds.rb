@@ -15,11 +15,8 @@ Flight.delete_all
   end
 
   airports = Airport.all.to_a.permutation(2).to_a
-  airports.each do |id|
-    5.times do
-      departure = Faker::Time.between(from: DateTime.now, to: 7.days.from_now, format: :short) #=> "2018/10/15 10:48"
-      arrival = Faker::Time.between(from: departure, to: Date.parse(departure) + 17.hours, format: :short)
-      Flight.create(from_airport: id[0], to_airport: id[1], duration: rand(120..480), arrival_time: arrival, departure_time: departure)
-    end
-    return
+  airports.sample(5).each do |id|
+    departure = Faker::Time.between(from: DateTime.now, to: 7.days.from_now, format: :short) #=> "2018/10/15 10:48"
+    arrival = Faker::Time.between(from: departure, to: DateTime.parse(departure) + 17.hours, format: :short)
+    Flight.create(from_airport: id[0], to_airport: id[1], arrival_time: arrival, departure_time: departure)
   end

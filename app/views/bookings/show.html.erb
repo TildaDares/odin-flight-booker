@@ -1,0 +1,16 @@
+<h2 class="text-center text-white mt-5 text-monospace">Flight Information</h2>
+<div class="container col-lg-5 form-border text-dark bg-white pt-3 mt-3 pb-5 text-monospace">
+  <p class="font-weight-bold">Flight Number: <span class="font-weight-normal"><%= @booking.flight.id %></span></p>
+  <p class="font-weight-bold">Destination: <span class="font-weight-normal"><%= "#{@booking.flight.from_airport.code} - #{@booking.flight.to_airport.code}" %></span></p>
+  <p class="font-weight-bold">Departure Time: <span class="font-weight-normal"><%= @booking.flight.departure_time.strftime("%A, %d %b %Y %l:%M %p") %></span></p>
+  <p class="font-weight-bold">Estimated Arrival Time: <span class="font-weight-normal"><%= @booking.flight.arrival_time.strftime("%A, %d %b %Y %l:%M %p") %></span></p>
+  <p class="font-weight-bold">Flight Duration: <span class="font-weight-normal"><%= distance_of_time_in_words(@booking.flight.departure_time, @booking.flight.arrival_time, scope: 'datetime.distance_in_words.short') %></span></p>
+  <div class="d-flex flex-row">
+    <p class="mr-3 font-weight-bold">Passenger(s):<p>
+    <div class="d-block">
+      <% @booking.passengers.each do |passenger| %>
+        <p><%= passenger.name %><p>
+      <% end %>
+    </div>
+  <div>
+</div>

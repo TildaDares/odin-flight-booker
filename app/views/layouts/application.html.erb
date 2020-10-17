@@ -13,6 +13,22 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="alert alert-success alert-dismissible fade show container col-lg-7 text-monospace h-25">
+        <p class="notice"><%= notice %></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger alert-dismissible fade show container col-lg-7 text-monospace h-25">
+        <%= alert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
     <nav class="color-8 navbar navbar-lg-expand">
       <a href="/flights" class="navbar-brand text-white"> Odin's Bookings </a>
     </nav>

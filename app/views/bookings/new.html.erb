@@ -1,6 +1,6 @@
-<table class="w-75 text-white container">
-  <p class="text-center text-white mt-5 mb-1" style="font-size: 1.9rem"><%= "#{@flight.from_airport.code} - #{@flight.to_airport.code}" %></p>
-  <p class="text-white text-center"><%= @flight.departure_time.strftime("%A, %d %b %Y") %></p>
+<table class="w-75 text-white container mb-5 text-monospace">
+  <p class="text-center text-white mt-5 mb-1 text-monospace" style="font-size: 1.9rem"><%= "#{@flight.from_airport.code} - #{@flight.to_airport.code}" %></p>
+  <p class="text-white text-center text-monospace"><%= @flight.departure_time.strftime("%A, %d %b %Y") %></p>
   <tr>
     <th>Flight Number</th>
     <th>Time of Departure</th>		
@@ -15,13 +15,20 @@
     </tr>
 </table>
 
-<div class="w-100 h-75">
-<%= form_with(model: @booking, local: true) do |f| %>
-  <%= f.fields_for :passengers do |p| %>
-    <%= p.label "Name" %>
-    <%= p.text_field :name %>
-    <%= p.label "Email" %>
-    <%= p.text_field :email %>
-  <% end %>
+<%= bootstrap_form_with(model: @booking, local: true, layout: :horizontal) do |f| %>
+  <%= f.hidden_field(:flight_id, :value => params[:booking][:flight_id]) %>
+  <div class="container mt-5 shadow bg-white rounded form-border pt-5 mb-5 col-lg-7 text-monospace">
+    <% i = 1 %>
+    <%= f.fields_for :passengers do |p| %>
+      <h5 class="pb-2 pb-lg-4">Passenger <%= i %>:</h5>
+      <div class="d-flex flex-lg-row w-100 flex-column mb-5 justify-content-around">
+        <%= p.text_field :name, class: "ml-3", placeholder: "Passenger's name", label: "Name:", required: true %>
+        <%= p.text_field :email, class: "ml-3", placeholder: "johndoe@example.com", label: "Email:", required: true %>
+      </div>
+      <% i += 1 %>
+    <% end %>
+    <div class="w-100 d-flex justify-content-center align-items-center mt-5 pb-5">
+      <%= f.submit "Submit", :class => "btn btn-outline-dark w-50 text-white text-color-7 col-lg-2" %>
+    </div>
+  </div>
 <% end %>
-</div>
