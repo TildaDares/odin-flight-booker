@@ -28,6 +28,10 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  datetime:
+    distance_in_words:
+      short:
+        about_x_hours:
+          one: '1 hour'
+          other: '%{count} hours'

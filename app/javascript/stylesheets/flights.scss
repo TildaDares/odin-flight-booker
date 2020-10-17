@@ -1,0 +1,50 @@
+body {
+    background: linear-gradient(to bottom right, #5A189A, #7B2CBF, #3C096C, #240046);
+    background: -moz-linear-gradient(bottom right, #5A189A, #7B2CBF, #3C096C, #240046);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+select,
+.numbers {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 3px;
+    border: 1px solid black;
+    background: transparent;
+    padding: 2px;
+    color: black;
+}
+
+option:hover,
+option:focus {
+    background-color: purple;
+}
+
+.form-border {
+    border: 2px solid #C77DFF;
+}
+
+table,
+th,
+td {
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 5px;
+}
+
+th {
+    text-align: left;
+}
+
+.no-border {
+    border: none;
+}

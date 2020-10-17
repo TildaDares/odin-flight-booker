@@ -1,0 +1,56 @@
+<div class="container mt-5 shadow bg-white rounded form-border">
+  <%= form_with(model: @flights, url: "/flights", method: "get", local: true) do |f| %>
+    <div class="d-flex flex-lg-row w-100 pt-4 mb-4 ml-2 flex-column flex-md-row mt-5 pb-lg-5">
+      <%= f.label "From:" %>
+      <%= f.collection_select(:from_airport_id, Airport.all, :id, :code, {}, { "class" => "w-100 ml-lg-3 mb-4 mb-lg-0 col-lg-5 mr-lg-5" }) %>
+
+      <%= f.label "To:" %>
+      <%= f.collection_select(:to_airport_id, Airport.all, :id, :code, {}, { "class" => "w-100 ml-lg-3 col-lg-5" }) %>
+    </div>
+    <div class="d-flex flex-lg-row w-100 pt-1 pt-lg-5 ml-2 pb-lg-5 flex-column flex-md-row">
+      <%= f.label "No. of Seats:", :class => "mr-2" %>
+      <%= f.number_field :passengers, in: 1..4, step: 1, value: 1, :class => "w-100 numbers mb-5 mb-lg-0 col-lg-4 mr-lg-5 h-75" %>
+      <%= f.label "Flight Date:", :class => "ml-lg-5" %>
+      <%= f.collection_select(:departure_time, Flight.all, :departure_time, :change_date_format, {}, { "type": "date", "class" => "w-100 numbers mb-5 mb-lg-0 col-lg-4 h-75 ml-lg-3" }) %>
+    </div>
+    <div class="w-100 d-flex justify-content-center align-items-center mt-5 pb-5">
+      <%= f.submit "Search for Flights", :class => "btn btn-outline-dark w-50 text-white text-color-7 col-lg-2" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-5">
+  <% unless @flights.nil? %>
+    <%= form_with(url: "bookings/new/", method: "get", local: true) do |f| %>
+      <%= hidden_field_tag(:passengers, params[:passengers]) %>
+      <% @flights.each do |flight| %>
+        <table class="w-75 text-white container">
+          <p class="text-center text-white mt-5 mb-1" style="font-size: 1.9rem"><%= "#{flight.from_airport.code} - #{flight.to_airport.code}" %></p>
+          <p class="text-white text-center"><%= flight.departure_time.strftime("%A, %d %b %Y") %></p>
+          <tr>
+            <th class="no-border"></th>
+            <th>Flight Number</th>
+            <th>Time of Departure</th>		
+            <th>Estimated Time of Arrival</th>
+            <th>Flight Duration</th>
+          </tr>
+            <tr>
+              <td class="no-border"><%= collection_radio_buttons :bookings, :flight_id, @flights, :id, :departure_time, { checked: @flights.first.id } do |b| %>
+                <%= b.label { b.radio_button } %>
+                <td><%= b.object.id %></td>
+                <td><%= b.object.departure_time.strftime("%I:%M %p") %></td>
+                <td><%= b.object.arrival_time.strftime("%A, %d %b %Y %l:%M %p") %></td>
+                <td><%= distance_of_time_in_words(b.object.departure_time, b.object.arrival_time, scope: 'datetime.distance_in_words.short') %></td>
+                <% end %>
+              </td>
+            </tr>
+        </table>
+      <% end %>
+      <div class="w-100 d-flex justify-content-center align-items-center">
+        <%= f.submit "Book Flight", :class => "btn btn-outline-success w-50 text-white color-3 col-lg-2 shadow mt-5" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center text-white mt-5 mb-3" style="font-size: 1.9rem">No available flights</p>
+  <% end %>
+</div>
