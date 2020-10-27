@@ -6,6 +6,7 @@
   <body>
     <p>
       <%= @passenger.name %> you have successfully booked a flight. Your flight details are: </p>
+      <p>-------------------------------------</p>
   <p>Flight Number: <span><%= @passenger.booking.flight.id %></span></p>
   <p>Destination: <span><%= "#{@passenger.booking.flight.from_airport.code} - #{@passenger.booking.flight.to_airport.code}" %></span></p>
   <p>Departure Time: <span><%= @passenger.booking.flight.departure_time.strftime("%A, %d %b %Y %l:%M %p") %></span></p>

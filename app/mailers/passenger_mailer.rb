@@ -1,8 +1,8 @@
 class PassengerMailer < ApplicationMailer
-  default from: 'donotreply@odinsbookings.com'
+  default from: 'railsexampleapp@gmail.com'
 
-  def thank_you_email(passenger)
-    @passenger = passenger
+  def thank_you_email
+    @passenger = params[:passenger]
     mail(to: @passenger.email, subject: 'Booking Confirmation')
   end
 end
