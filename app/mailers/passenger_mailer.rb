@@ -1,5 +1,5 @@
 class PassengerMailer < ApplicationMailer
-  default from: 'odinbookingssupport@gmail.com'
+  default from: 'donotreply@odinsbookings.com'
 
   def thank_you_email(passenger)
     @passenger = passenger
