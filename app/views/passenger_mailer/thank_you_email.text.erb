@@ -1,0 +1,9 @@
+<%= @passenger.name %> you have successfully booked a flight. Your flight details are:
+
+  Flight Number: <%= @passenger.booking.flight.id %>
+  Destination: <%= "#{@passenger.booking.flight.from_airport.code} - #{@passenger.booking.flight.to_airport.code}" %>
+  Departure Time: <%= @passenger.booking.flight.departure_time.strftime("%A, %d %b %Y %l:%M %p") %>
+  Estimated Arrival Time: <%= @passenger.booking.flight.arrival_time.strftime("%A, %d %b %Y %l:%M %p") %>
+  Flight Duration: <%= distance_of_time_in_words(@passenger.booking.flight.departure_time, @passenger.booking.flight.arrival_time, scope: 'datetime.distance_in_words.short') %>
+    
+    Thanks for using Odin's Bookings and have a great day!

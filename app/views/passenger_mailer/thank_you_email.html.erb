@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      <%= @passenger.name %> you have successfully booked a flight. Your flight details are: </p>
+  <p>Flight Number: <span><%= @passenger.booking.flight.id %></span></p>
+  <p>Destination: <span><%= "#{@passenger.booking.flight.from_airport.code} - #{@passenger.booking.flight.to_airport.code}" %></span></p>
+  <p>Departure Time: <span><%= @passenger.booking.flight.departure_time.strftime("%A, %d %b %Y %l:%M %p") %></span></p>
+  <p>Estimated Arrival Time: <span><%= @passenger.booking.flight.arrival_time.strftime("%A, %d %b %Y %l:%M %p") %></span></p>
+  <p>Flight Duration: <span><%= distance_of_time_in_words(@passenger.booking.flight.departure_time, @passenger.booking.flight.arrival_time, scope: 'datetime.distance_in_words.short') %></span></p>
+  <p></p>
+    <p>Thanks for using Odin's Bookings and have a great day!</p>
+  </body>
+</html>
